@@ -1,5 +1,6 @@
 import android.content.ContentValues
 import android.util.Log
+import android.util.Patterns
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -16,10 +17,13 @@ class FirebaseLoginClass {
                 eplm.toastMessage = "Welcome!!"
                 onSuccess(eplm)
             } else {
-                createLoginWithUserAndPassword(eplm, onSuccess, onFailure)
-                // TODO - Consider refactoring this to go to a separate
-                // registration page rather than automatically creating
-                // a new user
+                eplm.toastMessage = "User not found in system."
+                eplm.errorMessage = "That email and password combination is incorrect. Would you like to register a new user?"
+                onFailure(eplm)
+//                createLoginWithUserAndPassword(eplm, onSuccess, onFailure)
+//                // TODO - Consider refactoring this to go to a separate
+//                // registration page rather than automatically creating
+//                // a new user
             }
         }
     }
@@ -43,5 +47,27 @@ class FirebaseLoginClass {
 
     private fun logError(message: String){
         Log.w(ContentValues.TAG, message)
+    }
+
+    fun emailAndPasswordAreValid(email: String, password: String, showError:(String)->Unit, clearError:()->Unit): Boolean {
+        if (!emailIsValid(email)){
+            showError("Email is not in the correct format.")
+            return false
+        }
+        return emailIsValid(email) && passwordIsValid(password, showError, clearError)
+    }
+
+    private fun passwordIsValid(password: String, showError: (String) -> Unit, clearError: () -> Unit): Boolean {
+        val minimumNumberOfCharacters = 8
+        if(password.length >= minimumNumberOfCharacters) {
+            clearError()
+            return true
+        }
+        showError("The password must be longer than $minimumNumberOfCharacters characters")
+        return false
+    }
+
+    private fun emailIsValid(email: String): Boolean {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 }

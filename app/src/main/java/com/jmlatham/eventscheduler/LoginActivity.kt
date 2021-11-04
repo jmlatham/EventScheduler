@@ -2,6 +2,8 @@ package com.jmlatham.eventscheduler
 
 import EmailPasswordLoginModel
 import FirebaseLoginClass
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,6 +23,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var edtPassword: EditText
     private lateinit var btnLogin: Button
     private lateinit var errorMessage: TextView
+    private lateinit var alertDialog: AlertDialog
     private val flc: FirebaseLoginClass = FirebaseLoginClass()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +53,20 @@ class LoginActivity : AppCompatActivity() {
                 flc.loginWithUserNameAndPassword(eplm, onSuccess, onFailure)
             }
         }
+
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setMessage("The email and password combination supplied do not match any registered users. Would you like to register as a new user?")
+            .setTitle("Sign In Failed")
+            .setPositiveButton("Yes", DialogInterface.OnClickListener {
+                dialog, which ->
+                navigateToRegisterActivity("", edtEmail.text.toString())
+            })
+            .setNegativeButton("No", DialogInterface.OnClickListener {
+                    dialog, which ->
+                    // merely close the dialog box
+            })
+        alertDialog = alertDialogBuilder.create()
+
     }
 
     public override fun onStart() {
@@ -82,10 +99,19 @@ class LoginActivity : AppCompatActivity() {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
+    private fun navigateToRegisterActivity(message:String, email:String){
+        showError(message)
+        val intent = Intent(this, RegisterActivity::class.java).apply{
+            putExtra("email", email)
+        }
+        startActivity(intent)
+    }
+
     private fun navigateToMainActivity(user: FirebaseUser?) {
         showError("")
         if (user != null) {
-            val intent = Intent(this, MainActivity::class.java).apply {
+//            val intent = Intent(this, MainActivity::class.java).apply {
+            val intent = Intent(this, NavDrawerActivity::class.java).apply {
                 putExtra("email", user.email)
                 putExtra("displayName", user.displayName)
                 putExtra("phoneNumber", user.phoneNumber)
@@ -105,6 +131,8 @@ class LoginActivity : AppCompatActivity() {
     private val onFailure = fun(eplm: EmailPasswordLoginModel){
         toastUser(eplm.toastMessage)
         showError(eplm.errorMessage)
+
+        alertDialog.show()
     }
 
     private fun toastUser(message:String){
