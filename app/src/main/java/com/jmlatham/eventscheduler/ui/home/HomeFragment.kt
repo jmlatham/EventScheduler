@@ -13,6 +13,9 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.jmlatham.eventscheduler.R
 import com.jmlatham.eventscheduler.databinding.FragmentHomeBinding
+import com.jmlatham.eventscheduler.MainActivity
+import com.jmlatham.eventscheduler.NavDrawerActivity
+
 
 class HomeFragment : Fragment() {
 
@@ -40,7 +43,7 @@ class HomeFragment : Fragment() {
         })
         val signOutButton: Button = binding.buttonSignOut
         signOutButton.setOnClickListener{
-            Firebase.auth.signOut()
+            (activity as NavDrawerActivity?)?.signOut(Firebase.auth.currentUser?.email.toString())
         }
         return root
     }

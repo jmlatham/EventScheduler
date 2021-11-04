@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Event Scheduler</string>
-    <string name="action_sign_in">Sign In or Register</string>
+    <string name="action_sign_in">Sign In</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_email">Email</string>
     <string name="action_sign_in_short">Sign In</string>
@@ -20,4 +20,16 @@
     <string name="ok">OK</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="action_register">Register</string>
+    <string name="nameFormLabel">Name</string>
+    <string name="firstNameHint">First</string>
+    <string name="middleNameHint">Middle</string>
+    <string name="lastNameHint">Last</string>
+    <string name="suffixHint">e.g. Jr. or Ph.D.</string>
+    <string name="titleHint">e.g. Dr., Mr., or Mrs.</string>
+    <string name="nicknameHint">e.g. \'Cool Daddy\'</string>
+    <string name="contactInformationFormLabel">Contact Information</string>
+    <string name="phoneNumberHint">(123) 456-7890</string>
+    <string name="websiteHint">www.mywebsite.org</string>
+    <string name="cancelButton">Cancel</string>
 </resources>

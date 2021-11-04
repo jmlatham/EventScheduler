@@ -1,3 +1,6 @@
+package com.jmlatham.eventscheduler.login
+
+import EmailPasswordLoginModel
 import android.content.ContentValues
 import android.util.Log
 import android.util.Patterns
@@ -20,21 +23,17 @@ class FirebaseLoginClass {
                 eplm.toastMessage = "User not found in system."
                 eplm.errorMessage = "That email and password combination is incorrect. Would you like to register a new user?"
                 onFailure(eplm)
-//                createLoginWithUserAndPassword(eplm, onSuccess, onFailure)
-//                // TODO - Consider refactoring this to go to a separate
-//                // registration page rather than automatically creating
-//                // a new user
             }
         }
     }
 
     fun createLoginWithUserAndPassword(eplm: EmailPasswordLoginModel, onSuccess:(EmailPasswordLoginModel)->Unit, onFailure:(EmailPasswordLoginModel)->Unit) {
         myAuth.createUserWithEmailAndPassword(eplm.email, eplm.password)
-            .addOnCompleteListener() { task ->
+            .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     eplm.toastMessage = "User created successfully!"
                     eplm.user = myAuth.currentUser!!
-                    logError("createuserWithEmail:Success")
+                    logError("createUserWithEmail:Success")
                     onSuccess(eplm)
                 } else {
                     eplm.toastMessage = "Login Failed: try again"

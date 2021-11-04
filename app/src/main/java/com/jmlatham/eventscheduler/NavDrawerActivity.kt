@@ -1,5 +1,6 @@
 package com.jmlatham.eventscheduler
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import com.google.android.material.snackbar.Snackbar
@@ -11,6 +12,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.jmlatham.eventscheduler.databinding.ActivityNavDrawerBinding
 
 class NavDrawerActivity : AppCompatActivity() {
@@ -53,5 +56,18 @@ class NavDrawerActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_nav_drawer)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    fun signOut(email: String){
+        Firebase.auth.signOut()
+        openLoginActivity(email)
+        finish()
+    }
+
+    private fun openLoginActivity(email: String) {
+        val intent = Intent(this, LoginActivity::class.java).apply {
+            putExtra("email", email)
+        }
+        startActivity(intent)
     }
 }
