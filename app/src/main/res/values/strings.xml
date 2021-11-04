@@ -13,6 +13,11 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_event">Events</string>
+    <string name="menu_group">Groups</string>
+    <string name="menu_notification">Notifications</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

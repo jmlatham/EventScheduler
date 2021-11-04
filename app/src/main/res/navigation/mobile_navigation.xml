@@ -12,14 +12,20 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.jmlatham.eventscheduler.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_event"
+        android:name="com.jmlatham.eventscheduler.ui.events.EventsFragment"
+        android:label="@string/menu_event"
+        tools:layout="@layout/fragment_events" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.jmlatham.eventscheduler.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_notification"
+        android:name="com.jmlatham.eventscheduler.ui.notifications.NotificationsFragment"
+        android:label="@string/menu_notification"
+        tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/nav_group"
+        android:name="com.jmlatham.eventscheduler.ui.groups.GroupsFragment"
+        android:label="@string/menu_group"
+        tools:layout="@layout/fragment_groups" />
 </navigation>
