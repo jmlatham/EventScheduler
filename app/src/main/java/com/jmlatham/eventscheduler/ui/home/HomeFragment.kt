@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.jmlatham.eventscheduler.R
 import com.jmlatham.eventscheduler.databinding.FragmentHomeBinding
 
@@ -35,6 +38,10 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+        val signOutButton: Button = binding.buttonSignOut
+        signOutButton.setOnClickListener{
+            Firebase.auth.signOut()
+        }
         return root
     }
 
