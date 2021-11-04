@@ -30,7 +30,7 @@ class NavDrawerActivity : AppCompatActivity() {
         setSupportActionBar(binding.appBarNavDrawer.toolbar)
 
         binding.appBarNavDrawer.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "Today is a Great DAY!!", Snackbar.LENGTH_SHORT)
                 .setAction("Action", null).show()
         }
         val drawerLayout: DrawerLayout = binding.drawerLayout
